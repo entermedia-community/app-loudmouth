@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<user>
+  <user-name>admin</user-name>
+  <password>admin</password>
+  <creation-date>1138306140675</creation-date>
+  <properties>
+    <property name="email" value="cburkey@openedit.org"/>
+    <property name="lastName" value="Chris S. Burkey"/>
+  </properties>
+  <group id="blog"/>
+  <group id="editors"/>
+  <group id="administrators"/>
+</user>

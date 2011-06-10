@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<page>
+	<layout/>
+	<property name="editable">false</property>
+	<property name="showToolbar">true</property>
+	<generator name="admintoolbarGenerator" />
+</page>

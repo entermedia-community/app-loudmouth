@@ -1,0 +1,60 @@
+#set ( $editPath = $entry.path )
+#set ( $origURL = "index.html" )
+<title>$editPath</title>
+<link rel="stylesheet" type="text/css" href="$home/openedit/admin.css"/>
+<link rel="stylesheet" type="text/css" href="$home/openedit/styles/branding.css"/>
+<link rel="stylesheet" type="text/css" href="$home/openedit/editors/html/editall/editorbuttons.css"/>
+
+<script language="JavaScript">
+
+	var fieldDocumentModified = false;
+
+	function editEntrySave()
+	{
+		//alert("here");
+		var html = grabHtml();
+		document.viewForm.content.value = html;
+		document.viewForm.submit();	
+	}
+	var usingIE = navigator.appVersion.indexOf("MSIE") > 0? true : false;
+	if ( usingIE )
+	{
+		document.body.onload = function() { Start(); };
+	}
+	else
+	{
+		window.onload = function() { Start(); };
+	}
+	alternativeSave = editEntrySave;
+
+	
+</script>
+
+
+</head>
+
+
+<table style="width: 70%; height: 70%; padding-left:20px" border="0"  cellpadding="0" cellspacing="0">
+<tr>
+	<td valign="top" ><p>Please type your entry and a title then press the save button </p>
+		<form name="viewForm" id="viewForm" method="post"  action="index.html">
+        	<input type="hidden" name="editPath" value="$entry.path"/>
+        	<input type="hidden" name="content" />
+			<input type="hidden" name="oe-action" value="BlogModule.saveEntry" />
+			<input type="hidden" name="entryId" value="$entry.id" />			
+			<b>Title: </b><input size=30 type="text" name="title" />
+			<b>Author: </b><input size=30 type="text" name="author" value="$user.email" />
+
+        </form>
+</td>
+</tr>
+<tr >
+<td valign="top">$pages.stream("/openedit/editors/html/editall/view/view.html?editPath=${entry.path}&origURL=index.html")
+</td>
+</tr>
+<tr>
+<td width="100%"  height="1" style="border-top: thin solid black;">&nbsp;<br>
+
+</td>
+</tr>
+</table>

@@ -1,0 +1,50 @@
+<link rel="alternate" type="application/atom+xml" title="$blog.title" href="$blog.hostName${bloghome}/atom.xml">
+<link rel="alternate" type="application/rss+xml" title="$blog.title" href="$blog.hostName${bloghome}/rss.xml">
+<!-- Begin #content - Centers all content and provides edges for floated columns -->
+
+<!-- Blog Header -->
+<table border="0" style="padding-left: 10px; padding-right: 10px;" cellspacing=5>
+ <tr>
+  <td valign=top>
+ #if ($pages.doesExist("./images/headshot.gif"))
+   <img src="$home/blog/images/headshot.gif" width="147" height="147" />
+   <hr noshade color="#009933" height="1px"/>
+ #end
+
+
+  $pages.stream("./sidebar.html")
+
+  </td>
+
+<td>
+ <p class="content">$pages.stream("$bloghome/description.html")
+ </p>
+  <!-- Begin .post -->
+#foreach( $entry in $blog.getRecentEntries(5) )     
+
+  <h2 class="pageTitle">$entry.published("EEEE, MMMM d, yyyy")</h2>
+
+	 
+    <h3 class="pageSubTitle">
+	 $entry.title
+    </h3>
+      <p>
+		$entry.description.value
+    </p>
+
+    <p class="XXpost-footer">
+      posted by $entry.author | $entry.published("h:mm a") |
+      
+    <a class="XXcomment-link" href="${entry.link}">$entry.countComments() comment#if( $entry.countComments() > 1 )s #end</a>
+  #if( $blog.canEdit($user) )
+		[<a class="XXcomment-link" href="${home}${bloghome}/index.html?oe-action=BlogModule.removeEntry&entryId=${entry.id}">remove posting</a> ]
+  #end
+    </p>
+
+#end
+  <!-- End .post -->
+</td>
+
+ </tr>
+
+</table>

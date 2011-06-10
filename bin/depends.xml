@@ -1,0 +1,4 @@
+<plugin projectname="loudmouth">
+	<depend>entermedia-server</depend>
+	
+</plugin>

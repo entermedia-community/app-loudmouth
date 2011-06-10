@@ -1,0 +1,5 @@
+<page>
+
+	<path-action name="BlogModule.loadPermalink" />
+	<contentfile>../../../../comments.html</contentfile>
+</page>

@@ -1,0 +1,127 @@
+<style type="text/css">
+@import url("/yetanotherblog/_style.css");
+</style>
+
+<link rel="alternate" type="application/atom+xml" title="Christopher's Blog" href="http://christopherburkey.blogspot.com/atom.xml"><!-- Begin #content - Centers all content and provides edges for floated columns -->
+
+<div id="content">
+<!-- Blog Header -->
+
+<div id="header"><div>
+
+  <h1 id="blog-title">
+    
+	Christopher's Blog
+	
+  </h1>
+  <p id="description"></p>
+
+</div></div><!-- Begin #main - Contains main-column blog content -->
+
+<div id="main"><div id="main2"><div id="main3">
+    
+  <h2 class="date-header">Wednesday, February 16, 2005</h2>
+  
+  <!-- Begin .post -->
+#foreach( $entry in $blog.getRecentEntries(5) )     
+
+  <div class="post"><a name="110861197233516623"></a>
+	 
+    <h3 class="post-title">
+	 $entry.title
+    </h3>
+	 
+    
+
+    <div class="post-body">
+
+      <p>
+		$entry.description.value
+    </p>
+
+    </div>
+
+    <p class="post-footer">
+      <em>posted by $entry.author @ <a href="$entry.link" title="permanent link">10:45 PM</a></em> &nbsp;
+      
+         <a class="comment-link" href="comments.html?blogID=10889369">0 comments</a>
+        <span class="item-control admin-217612193 pid-2080515078"><a style="border: medium none ;" href="http://www.blogger.com/post-edit.g?blogID=10889369&amp;postID=110861197233516623&amp;quickEdit=true" title="Edit Post"><span class="quick-edit-icon">&nbsp;</span></a></span>
+    </p>
+
+  </div>
+#end
+  <!-- End .post -->
+
+    <!-- Begin #comments -->
+ 
+
+  <!-- End #comments --></div></div></div>
+
+<!-- End #main -->
+<!-- Begin #sidebar -->
+
+<div id="sidebar">
+
+  
+
+  <!-- Begin #profile-container -->
+
+            <div id="profile-container"> <h2 class="sidebar-title">About Me</h2> <dl class="profile-datablock">    <dd class="profile-data"> <strong>Name:</strong>christopherburkey </dd>  </dl>  <p class="profile-link"> <a href="http://www.blogger.com/profile/7058609">View my complete profile</a> </p> </div>  
+
+  <!-- End #profile -->
+  
+
+  <!-- Begin .box -->
+
+  <div class="box"><div class="box2"><div class="box3">
+
+  
+
+    <h2 class="sidebar-title">Previous Posts</h2>
+  
+  <ul id="recently">
+    
+        <li><a href="http://christopherburkey.blogspot.com/2005/02/now-online.html">Now online</a></li>
+     
+  </ul>
+  
+  
+  <h2 class="sidebar-title">Archives</h2>
+  
+  <ul class="archive-list">
+   	  
+    	<li><a href="http://christopherburkey.blogspot.com/2005_02_01_christopherburkey_archive.html">February 2005</a></li>
+	  
+      
+  </ul>
+  
+  
+  
+  <p id="powered-by"><a href="http://www.blogger.com/"><img src="Christopher%27s%20Blog_files/bloggerbutton1.gif" alt="Powered by Blogger"></a></p>
+
+    
+
+    <!--
+
+    <p>This is a paragraph of text that could go in the sidebar.</p>
+
+    -->
+  </div></div></div>
+
+  <!-- End .box -->
+
+</div>
+
+<!-- End #sidebar -->
+
+<!-- Begin #footer -->
+
+<div id="footer"><div><div><hr>
+  <p><!-- This is an optional footer. If you want text here, place it inside these tags, and remove this comment. -->&nbsp;</p>
+</div></div></div>
+
+<!-- End #footer -->
+</div>
+
+<!-- End #content -->
+

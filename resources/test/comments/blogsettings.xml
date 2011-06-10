@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<blog>
+  <title>Default Blog Settings</title>
+  <hostname>http://localhost:8080/</hostname>
+  <author>Me</author>
+  <description>Example Settings</description>
+  <auto-publish-entries>true</auto-publish-entries>
+  <archive-root-directory>/</archive-root-directory>
+
+  <allow-anonymous-comments>true</allow-anonymous-comments>
+  <auto-publish-comments>true</auto-publish-comments>
+  
+  <question id="1" description="4 + 5 = " answer="9" />
+  <question id="2" description="5 - 4 = " answer="1" />
+  <question id="3" description="4 + 3 = " answer="7" />
+  <question id="4" description="40 + 0 = " answer="40" />
+
+</blog>

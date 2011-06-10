@@ -1,0 +1,4 @@
+<permissions name="loudmouth" >
+<permission id="oe.blog" description="Blog Admin" /> 
+<permission id="oe.blog.post" description="Post Stories" /> 
+</permissions>

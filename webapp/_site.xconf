@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page>
+  <generator mimetypes="text/html" name="velocity"/>
+  <generator name="file"/>
+  <path-action name="Admin.autoLogin"/>
+  <edit-requirements>
+    <and>
+      <permission name="oe.edit"/>
+      <not>
+        <page-property equals="false" name="editable"/>
+      </not>
+    </and>
+  </edit-requirements>
+  <page-action name="Admin.allowEditing"/>
+  <page-action name="HtmlEditor.check404" alltypes="true"/>
+  <path-action name="LinkTree.loadLinks">
+    <linkpath>/links2.xml</linkpath>
+  </path-action>
+  <path-action name="LinkTree.setSelectedLinkByUrl">
+    <linkpath>/links2.xml</linkpath>
+  </path-action>
+  <property name="title">Example Site</property>
+  <property name="keywords">dog cat monkey</property>
+  <property name="description">This is a simple description</property>
+  <property name="oe.edit.draftedits">true</property>
+  <property name="allowguestregistration">true</property>
+  <property name="languages">
+    <value>English</value>
+    <value locale="es">Español</value>
+    <value locale="cn">汉语</value>
+  </property>
+  <property name="usemultiplelanguages">
+    <value>false</value>
+    <value locale="cn">false</value>
+  </property>
+
+  <layout>/layout/layout.html</layout>
+
+	<inner-layout>/layout/innerlayout.html</inner-layout>
+
+</page>

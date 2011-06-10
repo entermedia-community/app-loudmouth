@@ -1,0 +1,31 @@
+<form>
+<table width="740"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="10">&nbsp;</td>
+    <td width="150" valign="top" class="sideBar"><p>&nbsp;</p></td>
+    <td width="10">&nbsp;</td>
+    <td width="560" valign="top" class="content"><p class="pageTitle">Login</p>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam at lacus. Aenean porta ullamcorper 
+			libero. Integer tincidunt commodo enim. Duis  ornare diam.  
+			Praesent in lorem sed tortor  consectetuer. 
+			New users <a href="register.html?loginokpage=$!context.getRequestParameter('loginokpage')"><strong>click here to register</strong></a>. </p>
+        <table  border="0" cellspacing="0" cellpadding="6">
+          <tr>
+            <td>Email:</td>
+            <td><input name="email" type="text" size="30"></td>
+          </tr>
+          <tr>
+            <td>Password:</td>
+            <td><input name="password" type="password" size="30"></td>
+          </tr>
+          <tr>
+            <td align="right">&nbsp;</td>
+            <td><input type="submit" name="Submit" value="Login"> $!oe-exception</td>
+          </tr>
+        </table>        
+	<input type=hidden name="loginokpage" value="$!context.getRequestParameter('loginokpage')" />
+        <p><a href="#">Click here</a> to retrieve your login information. </p>
+        <p>&nbsp;</p></td>
+    <td width="10">&nbsp;</td>
+  </tr>
+</table>

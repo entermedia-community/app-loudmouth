@@ -1,0 +1,39 @@
+<link href="/css/master.css" rel="stylesheet" type="text/css">
+<table width="740"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="10">&nbsp;</td>
+    <td width="150" valign="top" class="content"><p>&lt; <a href="$blog.link">Return to Blog</a></p>
+	$pages.stream("/blog/sidebar.html")
+    </td>
+    <td width="10">&nbsp;</td>
+    <td width="560" valign="top" class="content"><p class="pageTitle">$entry.title</p>
+		
+		      <p>
+		$entry.description.value
+    </p>
+<hr>
+		
+#if( $user )        <p>Leave a Comment<br>
+<form name=posting>
+		  <textarea name="comment" cols="60" rows="8"></textarea> 
+        </p>
+        <p>
+          <input type="submit" name="Submit" value="Submit">
+        <input name="entryId" value="$entry.id" type="hidden" />
+        <input name="username" value="$user.firstName $user.lastName" type="hidden" />
+        <input name="oe-action" value="BlogModule.addNewComment" type="hidden" />
+
+		</p>
+#end
+        <hr size="1">        
+        <p><span class="pageTitle">Comments</span> #if ( $user ) #else <a href="blogLogin.html?loginokpage=$context.getPathUrl()">Add a Comment</a> #end </p>
+
+#foreach( $comment in $entry.getComments() )
+        <p>$comment.content</p>
+        <p><em>Written by: $comment.author at $comment.published("EEEE, MMM d, h:mm a")</em></p>
+        <p>----</p>
+#end
+    </td>
+    <td width="10">&nbsp;</td>
+  </tr>
+</table>

@@ -1,0 +1,6 @@
+<page>
+	<path-action name="BlogModule.generateFeed" />
+	<property name="feedtype">rss_2.0</property>
+	<layout />
+	<generator name="velocity"/>
+</page>

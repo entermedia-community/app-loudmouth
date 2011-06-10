@@ -1,0 +1,14 @@
+<blog>
+	<title>Chris Burkey's Blog</title>
+	<hostname>http://localhost:8080</hostname>
+	<blogroot>/yetanotherblog</blogroot>
+	<description>My cool blog</description>
+	<editors>
+		<username>admin</username>
+	</editors>
+	  <question id="1" description="4 + 5 = " answer="9" />
+  <question id="2" description="5 - 4 = " answer="1" />
+  <question id="3" description="4 + 3 = " answer="7" />
+  <question id="4" description="40 + 0 = " answer="40" />
+	
+</blog>

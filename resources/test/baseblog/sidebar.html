@@ -1,0 +1,47 @@
+                                                                                                                                                                                                              
+    <h2 class="pageSubTitle">Recent Posts</h2>
+                                                                                                                                                                                                              
+    #foreach( $entry in $blog.getEntries(0,5) )
+     <a href="$entry.link">$entry.title</a>
+     <br>
+    #end
+                                                                                                                                                                                                              
+    <br>
+                                                                                                                                                                                                              
+#if( $blog.getEntries(5,20).size() > 0 )                                                                                                                                                                                                              
+    <hr noshade color="#009933" height="1px"/>
+                                                                                                                                                                                                              
+    <br>
+    <h2 class="pageSubTitle">Archives</h2>
+                                                                                                                                                                                                              
+    #foreach( $entry in $blog.getEntries(5,20) )
+     <a href="$entry.link">$entry.title</a>
+     <br>
+    #end
+#end                                                                                                                                                                                                              
+    <br>
+                                                                                                                                                                                                              
+    <hr noshade color="#009933" height="1px"/>
+                                                                                                                                                                                                              
+    <br>
+                                                                                                                                                                                                              
+    <h2 class="pageSubTitle">Syndicate:</h2>
+                                                                                                                                                                                                              
+    <a href="rss.xml"><img src="$home/blog/images/rss.gif" width="50" height="14" border="0"></a>
+	<br>
+    <a href="atom.xml"><img src="$home/blog/images/atom.gif" width="50" height="14" border="0"></a>
+                                              
+ <hr noshade color="#009933" height="1px"/>
+                                                                                                                                                               
+#if( $user )
+	Welcome, $user.firstName $user.lastName<br>
+	 <a href="$home/openedit/authentication/logout.html">log out</a>
+	#if( $blog.canEdit($user) )
+	<br>
+    	<a href="$home$bloghome/addnewentry.html">Add New Story</a>    
+	#end
+
+#else
+	<a href="$home$bloghome/blogLogin.html">log in</a>
+#end
+

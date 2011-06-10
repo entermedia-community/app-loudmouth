@@ -1,0 +1,10 @@
+<blog>
+	<title>Chris Burkey's Blog</title>
+	<hostname>http://localhost:8080</hostname>
+	<blogroot>/baseblog</blogroot>
+	<description>My cool blog</description>
+		<editors>
+		<username>admin</username>
+	</editors>
+	
+</blog>

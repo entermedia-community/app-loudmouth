@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="BlogModule"
+	class="org.openedit.blog.modules.BlogModule">
+			<property name="commentNotification"><ref bean="BlogCommentNotification"/></property>
+				
+	</bean>
+  <bean id="BlogSearch"	class="org.openedit.blog.modules.BlogSearchModule" />
+
+  <bean id="BlogAdminModule" class="org.openedit.blog.modules.BlogAdminModule">
+  	<property name="postMail"><ref bean="postMail"/></property>
+  </bean>
+
+  <bean id="BlogCommentNotification" class="com.openedit.blog.BlogCommentNotification">
+			<property name="pageManager"><ref bean="pageManager"/></property>
+			<property name="userManager"><ref bean="userManager"/></property>
+			<property name="postMail"><ref bean="postMail"/></property>
+			
+	</bean>
+
+  <bean id="BlogArchive" class="org.openedit.blog.archive.BlogArchive">
+			<property name="pageManager"><ref bean="pageManager"/></property>
+			<property name="userManager"><ref bean="userManager"/></property>
+			<property name="entryArchive"><ref bean="EntryArchive"/></property>
+	</bean>
+
+  <bean id="EntryArchive" class="org.openedit.blog.archive.EntryArchive">
+			<property name="pageManager"><ref bean="pageManager"/></property>
+			<property name="userManager"><ref bean="userManager"/></property>
+			<property name="commentArchive"><ref bean="CommentArchive"/></property>
+	</bean>
+
+  <bean id="HtmlEntryArchive" class="org.openedit.blog.archive.HtmlEntryArchive">
+			<property name="pageManager"><ref bean="pageManager"/></property>
+			<property name="userManager"><ref bean="userManager"/></property>
+			<property name="commentArchive"><ref bean="CommentArchive"/></property>
+	</bean>
+
+
+  <bean id="CommentArchive" class="org.openedit.blog.archive.BlogCommentArchive">
+			<property name="pageManager"><ref bean="pageManager"/></property>
+			<property name="userManager"><ref bean="userManager"/></property>
+	</bean>
+
+  <bean id="DynamicBlogArchive"	class="org.openedit.blog.archive.BlogArchive">
+			<property name="pageManager"><ref bean="pageManager"/></property>
+			<property name="userManager"><ref bean="userManager"/></property>
+			<property name="entryArchive"><ref bean="HtmlEntryArchive"/></property>
+	</bean>
+    <bean id="RSSModule" name="RSSModule"
+		class="org.openedit.blog.modules.RSSModule"
+		abstract="false" singleton="true" lazy-init="default"
+		autowire="default" dependency-check="default">
+
+	
+	</bean>
+	
+	
+	<bean id="blogSearcher" class="com.openedit.blog.LuceneBlogSearcher" singleton="false">
+		<property name="pageManager">
+			<ref bean="pageManager" />
+		</property>
+		<property name="searcherManager">
+			<ref bean="searcherManager" />
+		</property>
+		<property name="rootDirectory">
+			<ref bean="root" />
+		</property>
+		<property name="moduleManager">
+			<ref bean="moduleManager" />
+		</property>
+	</bean>
+	
+	
+</beans>

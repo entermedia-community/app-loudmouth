@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<group>
+  <group-name>administrators</group-name>
+  <permissions>
+    <permission>wsp.edit.ftpUpload</permission>
+    <permission>oe.edit</permission>
+    <permission>oe.administration</permission>
+    <permission>wsp.edit.notify</permission>
+  </permissions>
+  <properties/>
+</group>

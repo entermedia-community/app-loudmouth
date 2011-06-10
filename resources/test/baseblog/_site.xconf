@@ -1,0 +1,7 @@
+<page>
+
+	<path-action name="BlogModule.getBlog" />
+	<generator name="velocity" mimetypes="text/html"/>
+	<generator name="file" />
+	<property name="editable">false</property>
+</page>

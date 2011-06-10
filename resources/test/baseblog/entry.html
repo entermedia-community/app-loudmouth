@@ -1,0 +1,23 @@
+<div   style="padding-left: 10px; padding-right: 10px;">
+
+<a href="$blog.link">Return to <strong>$blog.title</strong></a>
+
+  <h2 class="pageTitle">$entry.published("EEEE, MMMM d, yyyy")</h2>
+
+	 
+    <h3 class="pageSubTitle">
+	 $entry.title
+    </h3>
+      <p>
+		$entry.description.value
+    </p>
+
+    <p class="XXpost-footer">
+      posted by $entry.author | <a href="${entry.link}">$entry.published("h:mm a")</a> |
+      
+    <a class="XXcomment-link" href="${bloghome}/comments.html?entryId=${entry.id}">$entry.countComments() comment#if( $entry.countComments() > 1 )s #end</a>
+  #if( $blog.canEdit($user) )
+		[<a class="XXcomment-link" href="${bloghome}/index.html?oe-action=BlogModule.removeEntry&entryId=${entry.id}">remove posting</a> ]
+  #end
+    </p>
+</div>

@@ -1,0 +1,20 @@
+<page>
+
+	<path-action name="BlogModule.getBlog" />
+	<generator name="velocity" />
+
+	<page-action name="Admin.allowEditing">
+ 		<login-path>/intranet/login.html</login-path>
+   	</page-action>
+	
+	<edit-requirements>
+		<and>
+			<not><page-property name="editable" equals="false" /></not>
+		</and>
+	</edit-requirements>
+	<property name="editable">true</property>
+	
+	<property name="bloghome">/yetanotherblog</property>
+	<property name="blogarchivename">BlogArchive</property>
+	
+</page>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="default" name="upgrade">
+
+  <target name="default" depends="clean, update-dependencies, unwar, upgrade"/>
+   
+    <property name="appname" value="${ant.project.name}"/>
+    <property name="org" value="eInnovation, inc."/>
+    <property name="build" location="./tmp/oe_upgrade"/>
+    <property name="wardir" location="${build}/wartmp"/>
+    <property name="webinf" location="WEB-INF"/>
+   
+  <target name="clean">
+  	<!-- do nothing -->
+  </target>
+ 	
+  <target name="update-dependencies" depends="clean">
+	    <delete dir="${build}"/>
+		<mkdir dir="${build}"/>
+	<get src="http://dev.entermediasoftware.com/projects/loudmouth/ROOT.war" dest="${build}/ROOT.war" />	
+  </target>
+    
+  <target name="unwar" depends="update-dependencies">
+  	<mkdir dir="${build}/unpacked"/>
+    <unwar dest="${build}/unpacked">
+      <fileset dir="${build}">
+        <include name="ROOT.war"/>
+      </fileset>
+    </unwar>
+  </target>
+  
+  <target name="upgrade" depends="unwar">
+    <delete quiet="true">
+      <fileset dir="./lib" includes="loudmouth**.jar"/>
+      <fileset dir="./lib" includes="jdom**.jar"/>
+      <fileset dir="./lib" includes="rome**.jar"/>
+    </delete>
+    <copy todir="./lib" overwrite="false">
+      <fileset file="${build}/unpacked/WEB-INF/lib/loudmouth*.jar"/>
+    </copy>
+    <copy todir="./lib" overwrite="false">
+      <fileset file="${build}/unpacked/WEB-INF/lib/jdom*.jar"/>
+    </copy>
+    <copy todir="./lib" overwrite="false">
+      <fileset file="${build}/unpacked/WEB-INF/lib/rome*.jar"/>
+    </copy>
+    
+	<!-- overwrite the store directory files -->
+
+	<delete failonerror="false">
+		<fileset dir="../base/blog" />
+	</delete>
+	
+	<delete failonerror="false">
+		<fileset dir="../WEB-INF/base/blog" />
+	</delete>
+	
+    <copy todir="../WEB-INF/base/blog" preservelastmodified="true" >
+      <fileset dir="${build}/unpacked/WEB-INF/base/blog"/>
+    </copy>
+    
+  	<!--
+
+  	<mkdir dir="../blog" />
+   
+	<touch> 		 
+		<fileset file="../blog/**" />
+	</touch>
+
+   	 <copy todir="../blog" preservelastmodified="true" overwrite="false">
+      <fileset file="${build}/unpacked/blog/_site.xconf"/>
+    </copy>
+    -->
+
+    <touch file="web.xml"/>
+    <delete dir="${build}"/>
+  </target>
+
+  
+ 
+</project>

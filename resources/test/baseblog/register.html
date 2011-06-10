@@ -1,0 +1,72 @@
+<form method="post" name="orderForm" action="register.html">
+
+<table width="740"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="10">&nbsp;</td>
+    <td width="150" valign="top" class="sideBar"><p>&nbsp;</p></td>
+    <td width="10">&nbsp;</td>
+    <td width="560" valign="top" class="content"><p class="pageTitle">New User Registration </p>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam at lacus. Aenean porta ullamcorper libero. Integer tincidunt commodo enim.</p>
+        <table  border="0" cellspacing="0" cellpadding="6">
+          <tr>
+            <td align="right">First Name:</td>
+            <td><input name="property-firstName" type="text" size="30"></td>
+          </tr>
+          <tr>
+            <td align="right">Last Name:</td>
+            <td><input name="property-lastName" type="text" size="30"></td>
+          </tr>
+          <tr>
+            <td align="right">Address 1:</td>
+            <td><input name="property-shippingaddress1" type="text" size="30"></td>
+          </tr>
+          <tr>
+            <td align="right">Address 2:</td>
+            <td><input name="property-shippingaddress2" type="text" size="30"></td>
+          </tr>
+          <tr>
+            <td align="right">City:</td>
+            <td><input name="property-shippingcity" type="text" size="30"></td>
+          </tr>
+          <tr>
+            <td align="right">State or Province:</td>
+            <td><input name="property-shippingstate" type="text" size="15"></td>
+          </tr>
+          <tr>
+            <td align="right">Zip or Postal Code:</td>
+            <td><input name="property-shippingzipCode" type="text" size="15"></td>
+          </tr>
+          <tr>
+            <td align="right">Country:</td>
+            <td><input name="property-shippingcountry" type="text" size="15"></td>
+          </tr>
+          <tr>
+            <td align="right">Email:</td>
+            <td><input name="property-email" type="text" size="30"></td>
+          </tr>
+          <tr>
+            <td align="right">Phone Number:</td>
+            <td><input name="property-phone1" type="text" size="15"></td>
+          </tr>
+          <tr>
+            <td align="right">Password:</td>
+            <td><input name="password1" type="password" size="20"></td>
+          </tr>
+          <tr>
+            <td align="right">Confirm Password:</td>
+            <td><input name="password2" type="password" size="20"></td>
+          </tr>
+          <tr>
+            <td align="right">&nbsp;</td>
+            <td><input type="submit" name="Submit" value="Submit">  $!oe-error
+             </td>
+          </tr>
+        </table>        
+    </td>
+    <td width="10">&nbsp;</td>
+  </tr>
+</table>
+<input type=hidden name=oe-action value="BlogModule.registerNewUser" />
+<input type=hidden name=loginokpage value="$!context.getRequestParameter('loginokpage')" />
+
+</form>

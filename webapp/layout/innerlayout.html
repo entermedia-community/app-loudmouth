@@ -1,0 +1,7 @@
+$pages.streamContent()
+
+#if( !$content.getPath().startsWith("/blog") )
+<div class="post-footer">
+  Posted by <b>$entry.getUser()</b> on $entry.published("EEEE, MMM d yyyy h:mm a") <a class="comment-link" href="$home/comments/permalink${entry.path}">$entry.countVisibleComments() comment#if( $entry.countVisibleComments() != 1 )s #end</a>
+</div>
+#end
