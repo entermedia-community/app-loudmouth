@@ -84,16 +84,16 @@ public class LuceneBlogSearcher extends BaseLuceneSearcher
 		}
 		super.updateIndex(inData, doc, inDetails);
 		
-		doc.add(new Field("sourcepath", inData.getSourcePath(), Field.Store.YES, Field.Index.NO_NORMS));
+		doc.add(new Field("sourcepath", inData.getSourcePath(), Field.Store.YES, Field.Index.ANALYZED_NO_NORMS));
 		if (entry.getUser() != null)
 		{
-			doc.add(new Field("user", entry.getUser().getUserName(), Field.Store.YES, Field.Index.NO_NORMS));
-			doc.add(new Field("display", entry.getUser().toString(), Field.Store.YES, Field.Index.NO_NORMS));
+			doc.add(new Field("user", entry.getUser().getUserName(), Field.Store.YES, Field.Index.ANALYZED_NO_NORMS));
+			doc.add(new Field("display", entry.getUser().toString(), Field.Store.YES, Field.Index.ANALYZED_NO_NORMS));
 		}
 		
 		Date published = entry.getPublishedDate();
 		String val = DateTools.dateToString(published, Resolution.MINUTE);
-		doc.add(new Field("date", val, Field.Store.YES, Field.Index.NO_NORMS));
+		doc.add(new Field("date", val, Field.Store.YES, Field.Index.ANALYZED_NO_NORMS));
 
 	}
 	
