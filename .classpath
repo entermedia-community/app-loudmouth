@@ -6,7 +6,6 @@
 	<classpathentry kind="src" path="/resin3.x"/>
 	<classpathentry kind="lib" path="lib/jdom1.0.jar"/>
 	<classpathentry kind="lib" path="lib/rome-0.9.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/entermedia"/>
 	<classpathentry kind="lib" path="lib/compile/jakarta-servlet-api-4.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/entermedia-server"/>
 	<classpathentry kind="output" path="bin"/>
