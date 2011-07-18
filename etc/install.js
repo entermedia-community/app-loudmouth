@@ -4,7 +4,7 @@ importPackage( Packages.java.lang );
 importPackage( Packages.com.openedit.modules.update );
 
 
-var war = "http://dev.entermediasoftware.com/projects/loudmouth/ROOT.war";
+var war = "http://dev.entermediasoftware.com/jenkins/job/app-loudmouth/lastSuccessfulBuild/artifact/deploy/ROOT.war";
 
 var root = moduleManager.getBean("root").getAbsolutePath();
 var web = root + "/WEB-INF";
