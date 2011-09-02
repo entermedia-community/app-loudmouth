@@ -1,6 +1,5 @@
 package com.openedit.blog;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -8,10 +7,9 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.DateTools;
+import org.apache.lucene.document.DateTools.Resolution;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.DateTools.Resolution;
-import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.openedit.Data;
@@ -149,7 +147,7 @@ public class LuceneBlogSearcher extends BaseLuceneSearcher
 	}
 
 	
-	public void saveData(Object inData, User inUser)
+	public void saveData(Data inData, User inUser)
 	{
 		if(inData instanceof BlogEntry){
 			Blog blog = getBlog();
