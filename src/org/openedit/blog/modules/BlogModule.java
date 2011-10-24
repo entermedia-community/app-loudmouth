@@ -5,7 +5,9 @@ package org.openedit.blog.modules;
 
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -20,11 +22,13 @@ import com.openedit.blog.Blog;
 import com.openedit.blog.BlogComment;
 import com.openedit.blog.BlogCommentNotification;
 import com.openedit.blog.BlogEntry;
+import com.openedit.blog.LuceneBlogSearcher;
 import com.openedit.modules.BaseModule;
 import com.openedit.modules.admin.users.Question;
 import com.openedit.modules.html.EditorSession;
 import com.openedit.page.Page;
 import com.openedit.page.PageRequestKeys;
+import com.openedit.users.Group;
 import com.openedit.users.User;
 import com.openedit.users.filesystem.FileSystemUser;
 import com.openedit.util.URLUtilities;
@@ -44,7 +48,7 @@ public class BlogModule extends BaseModule {
 	public Blog getBlog(WebPageRequest req) throws OpenEditException {
 		Page inPath = req.getPage();
 
-		String catalogid = inPath.get("catalogid");
+		String catalogid = inPath.get("blogid");
 		if (catalogid == null) {
 			catalogid = inPath.get("bloghome");
 			catalogid = catalogid.substring(1);
@@ -58,17 +62,16 @@ public class BlogModule extends BaseModule {
 
 			throw new OpenEditException("Need to define bloghome page property");
 		}
-		
+
 		Blog blog = getBlog(home);
 		if (blog.getHostName() == null) {
 			log.info("no hostname specified in blogsettings.xml, attempting to auto configure");
 			String hostname = req.findValue("hostName");
 			if (hostname == null) {
 				log.info("no value for hostName specified in properties");
-				URLUtilities utils = (URLUtilities) req
-						.getPageValue(PageRequestKeys.URL_UTILITIES);
+				URLUtilities utils = (URLUtilities) req.getPageValue(PageRequestKeys.URL_UTILITIES);
 				if (utils != null) {
-					 hostname = utils.buildAppRoot();
+					hostname = utils.buildAppRoot();
 				}
 			}
 			blog.setHostName(hostname);
@@ -108,8 +111,7 @@ public class BlogModule extends BaseModule {
 
 	public void writeBlogSettings(WebPageRequest inReq) throws Exception {
 		Blog blog = getBlog(inReq);
-		Page settings = getPageManager().getPage(
-				blog.getBlogHome() + "/blogsettings.xml");
+		Page settings = getPageManager().getPage(blog.getBlogHome() + "/blogsettings.xml");
 		// read in some XML
 
 		String parameter = inReq.getRequestParameter("blogtitle");
@@ -134,15 +136,13 @@ public class BlogModule extends BaseModule {
 
 		StringWriter writer = new StringWriter();
 		try {
-			new BlogArchive().saveBlog(blog, writer, settings
-					.getCharacterEncoding());
+			new BlogArchive().saveBlog(blog, writer, settings.getCharacterEncoding());
 		} finally {
 			writer.close();
 		}
 
 		// lets write to a file
-		StringItem item = new StringItem(settings.getPath(), writer.toString(),
-				settings.getCharacterEncoding());
+		StringItem item = new StringItem(settings.getPath(), writer.toString(), settings.getCharacterEncoding());
 		item.setMessage("Edited blog settings via admin interface");
 		item.setAuthor(inReq.getUser().getUserName());
 		settings.setContentItem(item);
@@ -212,12 +212,11 @@ public class BlogModule extends BaseModule {
 		}
 	}
 
-	public void toggleEntrySubscription(WebPageRequest inReq)
-			throws OpenEditException {
+	public void toggleEntrySubscription(WebPageRequest inReq) throws OpenEditException {
 		User user = inReq.getUser();
-		
+
 		String userid = inReq.getRequestParameter("userid");
-		if(userid != null){
+		if (userid != null) {
 			user = getUserManager().getUser(userid);
 		}
 		if (user != null && !user.isVirtual()) {
@@ -231,15 +230,14 @@ public class BlogModule extends BaseModule {
 			}
 			BlogArchive archive = getArchive(inReq.getPath());
 			archive.saveEntry(blog, entry);
-	
+
 		}
 	}
 
 	/**
 	 * @param inReq
 	 */
-	public void unsubcribeFromEntry(WebPageRequest inReq)
-			throws OpenEditException {
+	public void unsubcribeFromEntry(WebPageRequest inReq) throws OpenEditException {
 		User user = inReq.getUser();
 		if (user != null && !user.isVirtual()) {
 			Blog blog = getBlog(inReq);
@@ -254,8 +252,8 @@ public class BlogModule extends BaseModule {
 	public void editEntry(WebPageRequest inReq) throws Exception {
 		Blog blog = getBlog(inReq);
 		String entryId = inReq.getRequestParameter("entryId");
-		if(entryId == null){
-			return ;
+		if (entryId == null) {
+			return;
 		}
 		BlogEntry entry = blog.getEntry(entryId);
 		inReq.putPageValue("blog", blog);
@@ -323,12 +321,14 @@ public class BlogModule extends BaseModule {
 		BlogEntry entry = (BlogEntry) inReq.getSessionValue("entry");
 		if (entry == null) {
 			entry = blog.createNewEntry(inReq.getUser());
+			inReq.putSessionValue("entry", entry);
+			inReq.putPageValue("newpost", "true");
 		}
 
 		// inReq.getPageStreamer().entry.getLink();
 
 		String content = inReq.getRequestParameter("content");
-		if(content == null){
+		if (content == null) {
 			content = inReq.getRequestParameter("content.value");
 		}
 		if (content != null) {
@@ -349,12 +349,11 @@ public class BlogModule extends BaseModule {
 		}
 
 		String author = inReq.getRequestParameter("author.value");
-		
+
 		entry.setAuthor(author);
-		
-		
+
 		String title = inReq.getRequestParameter("title.value");
-		if(title == null){
+		if (title == null) {
 			title = inReq.getRequestParameter("title");
 		}
 		entry.setTitle(title);
@@ -363,8 +362,7 @@ public class BlogModule extends BaseModule {
 		String[] properties = inReq.getRequestParameters("field");
 		if (properties != null) {
 			for (int i = 0; i < properties.length; i++) {
-				String value = inReq.getRequestParameter(properties[i]
-						+ ".value");
+				String value = inReq.getRequestParameter(properties[i] + ".value");
 				if (value != null) {
 					entry.addProperty(properties[i], value);
 				}
@@ -373,9 +371,12 @@ public class BlogModule extends BaseModule {
 		entry.setVisible(blog.isAutoPublishEntries());
 
 		BlogArchive archive = getArchive(inReq.getPath());
-		
+
 		archive.saveEntry(blog, entry);
 		archive.getEntryArchive().saveLinks(blog);
+		String catid = inReq.findValue("blogid");
+		LuceneBlogSearcher searcher = (LuceneBlogSearcher) getSearcherManager().getSearcher(catid, "blog");
+		searcher.updateIndex(entry);
 	}
 
 	public void removeEntry(WebPageRequest inReq) throws Exception {
@@ -434,9 +435,8 @@ public class BlogModule extends BaseModule {
 			BlogComment comment = blog.createNewComment(user, content);
 			entry.addComment(comment);
 			BlogArchive archive = getArchive(inReq.getPage());
-			archive.getEntryArchive().getCommentArchive().saveComments(blog,
-					entry);
-			getCommentNotification().commentAdded(inReq, blog, entry, comment);
+			archive.getEntryArchive().getCommentArchive().saveComments(blog, entry);
+			getCommentNotification(inReq.findValue("blogid")).commentAdded(inReq, blog, entry, comment);
 		}
 		// inReq.removeSessionValue("question");
 	}
@@ -470,8 +470,7 @@ public class BlogModule extends BaseModule {
 		if (comment.canEdit(user)) {
 			entry.removeComment(comment);
 			BlogArchive archive = getArchive(inReq.getPage());
-			archive.getEntryArchive().getCommentArchive().saveComments(blog,
-					entry);
+			archive.getEntryArchive().getCommentArchive().saveComments(blog, entry);
 		}
 		redirectToOrig(inReq);
 	}
@@ -484,12 +483,10 @@ public class BlogModule extends BaseModule {
 			BlogEntry entry = blog.getEntry(entryId);
 			BlogComment comment = entry.getComment(commentId);
 			if (comment != null) {
-				if (comment.canEdit(inReq.getUser())
-						|| blog.canEdit(inReq.getUser())) {
+				if (comment.canEdit(inReq.getUser()) || blog.canEdit(inReq.getUser())) {
 					comment.setVisible(!comment.isVisible());
 					BlogArchive archive = getArchive(inReq.getPage());
-					archive.getEntryArchive().getCommentArchive().saveComments(
-							blog, entry);
+					archive.getEntryArchive().getCommentArchive().saveComments(blog, entry);
 				}
 			}
 			redirectToOrig(inReq);
@@ -540,8 +537,7 @@ public class BlogModule extends BaseModule {
 		String entryId = inReq.getRequestParameter("entryId");
 		BlogEntry entry = blog.getEntry(entryId);
 
-		if (!blog.canEdit(inReq.getUser())
-				&& !entry.getUser().getUserName().equals(inReq.getUserName())) {
+		if (!blog.canEdit(inReq.getUser()) && !entry.getUser().getUserName().equals(inReq.getUserName())) {
 			throw new OpenEditException("User cannot edit blog");
 		}
 
@@ -550,12 +546,30 @@ public class BlogModule extends BaseModule {
 		archive.saveEntry(blog, entry);
 	}
 
-	public BlogCommentNotification getCommentNotification() {
-		return fieldCommentNotification;
+	public BlogCommentNotification getCommentNotification(String inCatalogid) {
+	
+		return (BlogCommentNotification) getModuleManager().getBean(inCatalogid, "BlogCommentNotification");
 	}
 
-	public void setCommentNotification(
-			BlogCommentNotification inCommentNotification) {
+	public void setCommentNotification(BlogCommentNotification inCommentNotification) {
 		fieldCommentNotification = inCommentNotification;
+	}
+
+	public void notifyOnPost(WebPageRequest inReq) throws Exception {
+		boolean onpost = Boolean.parseBoolean(inReq.findValue("sendnotificationonpost"));
+	
+		log.info("Notify on post was: " + onpost);
+		if (onpost) {
+			BlogEntry entry = (BlogEntry) inReq.getSessionValue("entry");
+			Blog blog = (Blog) inReq.getPageValue("blog");
+			String notificationgroup = inReq.findValue("notificationgroup");
+			log.info("Notify group was: " + notificationgroup);
+			Group group = getUserManager().getGroup(notificationgroup);
+			Collection users = getUserManager().getUsersInGroup(group);
+			// only send each mail once.
+			HashSet send = new HashSet();
+			send.addAll(users);
+			getCommentNotification(inReq.findValue("blogid")).blogPostAdded(inReq, blog, entry, send);
+		}
 	}
 }

@@ -3,6 +3,7 @@
  */
 package com.openedit.blog;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -103,6 +104,60 @@ public class BlogCommentNotification
 				log.error(ex);
 			}
 		}
+	}
+	
+	
+	public void blogPostAdded(WebPageRequest inReq, Blog inBlog, BlogEntry inEntry, Collection users) throws OpenEditException
+	{
+
+		for (Iterator iterator = users.iterator(); iterator.hasNext();)
+		{
+			User user = (User) iterator.next();
+			blogPostAdded(inReq, inBlog, inEntry, user);
+
+		}
+	}
+	
+	public void blogPostAdded(WebPageRequest inReq, Blog inBlog, BlogEntry inEntry, User inUser)
+	{
+		
+		inReq.putPageValue("entry", inEntry);
+		inReq.putPageValue("blog", inBlog);
+		String sitename = inReq.findValue("sitename");
+		String from = inReq.findValue("from");
+		String prefix = inReq.findValue("prefix");
+		
+		try
+		{
+			Page page = getPageManager().getPage(inBlog.getBlogHome() + "/layout/postemail.html");
+			TemplateWebEmail template = getPostMail().getTemplateWebEmail();
+			template.setMailTemplatePage(page);
+			template.setWebPageContext(inReq.copy(page));
+			template.loadSettings(template.getWebPageContext());
+			template.setFrom(from);
+			String sub = inEntry.getTitle();
+			if(prefix!= null){
+			sub = prefix;
+			
+			}
+			
+			
+	
+			template.setSubject(sub);
+			String email = inUser.getEmail();
+			if (email != null)
+			{
+				template.setTo(email);
+				template.send();
+
+			}
+
+		}
+		catch (Exception ex)
+		{
+			log.error(ex);
+		}
+
 	}
 
 	public PageManager getPageManager()

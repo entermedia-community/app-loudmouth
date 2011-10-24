@@ -34,7 +34,8 @@ import com.sun.syndication.feed.synd.SyndEntryImpl;
  * @author cburkey
  * 
  */
-public class BlogEntry extends SyndEntryImpl implements Serializable, Comparable, Data {
+public class BlogEntry extends SyndEntryImpl implements Serializable,
+		Comparable, Data {
 	protected String fieldPath;
 	protected List fieldComments;
 	transient protected PageManager fieldPageManager;
@@ -266,7 +267,8 @@ public class BlogEntry extends SyndEntryImpl implements Serializable, Comparable
 
 	public SimpleDateFormat getGmtStandard() {
 		if (fieldGmtStandard == null) {
-			fieldGmtStandard = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+			fieldGmtStandard = new SimpleDateFormat(
+					"yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 		}
 		return fieldGmtStandard;
 	}
@@ -348,10 +350,14 @@ public class BlogEntry extends SyndEntryImpl implements Serializable, Comparable
 			return getTitle();
 		}
 		if ("content".equals(key)) {
-			return getDescription().getValue();
+			if (getDescription() != null) {
+				String value = getDescription().getValue();
+				return value;
+			}
 		}
 		if ("date".equals(key)) {
-			return DateStorageUtil.getStorageUtil().formatForStorage(getPublishedDate());
+			return DateStorageUtil.getStorageUtil().formatForStorage(
+					getPublishedDate());
 		}
 		return (String) getProperties().get(key);
 	}
@@ -408,7 +414,8 @@ public class BlogEntry extends SyndEntryImpl implements Serializable, Comparable
 		Date published = getPublishedDate();
 		return daysBetween(published, now);
 	}
-	 public int daysBetween(Date d1, Date d2){
-	     return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
-	         }
+
+	public int daysBetween(Date d1, Date d2) {
+		return (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+	}
 }

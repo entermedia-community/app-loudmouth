@@ -20,11 +20,11 @@
 
 	<property name="blogarchivename">BlogArchive</property>
 	<property name="bloghome">/blog</property> 
-	<property name="catalogid">blog</property> 
+	<property name="blogid">blog</property> 
 
 	<property name="editable">false</property>
 
-		<inner-layout>/${catalogid}/layout/innerlayout.html</inner-layout>
+		<inner-layout>/${blogid}/layout/innerlayout.html</inner-layout>
 
   <property name="oeplugintype">openedit-blog</property>
   <property name="oeplugintitle">

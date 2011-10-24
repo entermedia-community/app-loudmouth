@@ -1,0 +1,11 @@
+#set( $resultdetail = $searcherManager.getSearcher("$content.blogid", "$content.searchtype").getDetailsForView("$content.searchtype/resultdetail", $user))
+#set( $resultdetail = $translations.filter($resultdetail, $context) )
+<div id="navigationrow">
+$pages.stream("./navigate.html", $context)		
+</div>
+
+	#foreach ( $cell in $hits.getPageOfHits() )
+<strong>$cell.title</strong> - <a href="$cell.sourcepath">View</a><br/>
+
+#end
+

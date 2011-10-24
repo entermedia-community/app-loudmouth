@@ -2,6 +2,7 @@
 	<property name="virtual">true</property>
 	<path-action name="EditModule.releaseEditLock" />
 	<path-action name="BlogModule.saveEntry" />
+	<path-action name="BlogModule.notifyOnPost"/>
 	<path-action name="EditModule.redirectToOriginal" />		
 
    <view-requirements>
