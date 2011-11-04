@@ -3,5 +3,6 @@
 	<path-action name="BlogModule.getBlog" />
 	<property name="bloghome">/comments</property>
 	<property name="blogarchivename">DynamicBlogArchive</property>
+		<property name="blogid">blog</property>
 	
 </page>

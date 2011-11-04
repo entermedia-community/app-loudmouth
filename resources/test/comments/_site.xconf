@@ -2,5 +2,6 @@
 <page>
 	<property name="fallbackdirectory">/base/blog</property>
 	<property name="bloghome">/comments</property>
+			<property name="blogid">comments</property>
 		
 </page>

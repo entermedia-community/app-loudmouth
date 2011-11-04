@@ -16,5 +16,6 @@
 	
 	<property name="bloghome">/yetanotherblog</property>
 	<property name="blogarchivename">BlogArchive</property>
+		<property name="blogid">yetanotherblog</property>
 	
 </page>
