@@ -20,12 +20,12 @@ unziper.unzip(  tmp + "/ROOT.war",  tmp );
 
 log.add("3. REPLACE LIBS");
 var files = new FileUtils();
-files.deleteMatch( web + "/lib/loudmouth*.jar");
+files.deleteMatch( web + "/lib/app-loudmouth*.jar");
 files.deleteMatch( web + "/lib/openedit-blog*.jar");
 files.deleteMatch( web + "/lib/jdom*.jar");
 files.deleteMatch( web + "/lib/rome*.jar");
 
-files.copyFileByMatch( tmp + "/WEB-INF/lib/loudmouth*.jar", web + "/lib/");
+files.copyFileByMatch( tmp + "/WEB-INF/lib/app-loudmouth*.jar", web + "/lib/");
 files.copyFileByMatch( tmp + "/WEB-INF/lib/jdom*.jar", web + "/lib/");
 files.copyFileByMatch( tmp + "/WEB-INF/lib/rome*.jar", web + "/lib/");
 
