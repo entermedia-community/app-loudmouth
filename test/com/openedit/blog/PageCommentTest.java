@@ -48,5 +48,10 @@ public class PageCommentTest extends BaseTestCase
  		
  		
 	}
-	
+	public void testComment() throws Exception
+	{
+ 	 		
+ 		
+ 		
+	}
 }
