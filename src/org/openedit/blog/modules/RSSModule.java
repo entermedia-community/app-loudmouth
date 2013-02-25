@@ -20,12 +20,13 @@ public class RSSModule {
 	public void loadRomeFeed(WebPageRequest inReq) throws OpenEditException {
 		String url = inReq.findValue("feed");
 		try {
+			System.setProperty("http.agent", "Test");
 			URL feedUrl = new URL(url);
 				SyndFeedInput input = new SyndFeedInput();
 				  SyndFeed feed = input.build(new XmlReader(feedUrl));
 				  inReq.putPageValue("rss", feed);
 				List entries = feed.getEntries();
-				System.out.println("hello");
+		//		System.out.println("hello");
 		
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block

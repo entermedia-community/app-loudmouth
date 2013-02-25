@@ -1,7 +1,9 @@
-Feed Description: $rss.description<br>
-Feed Author: $rss.author<br>
 #foreach($entry in $rss.entries)
+<hr>
+<a href="$entry.link" >$entry.title</a><br>
+$entry.description.value<br>
+$entry.author<br>
+$entry.getPublishedDate()<br>
 
-$entry.description.value
 #end
 

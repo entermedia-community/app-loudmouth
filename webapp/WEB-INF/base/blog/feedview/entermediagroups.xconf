@@ -1,0 +1,8 @@
+<page>
+<page-action name="RSSModule.loadRomeFeed">
+<feed>http://groups.google.com/group/entermedia/feed/rss_v2_0_msgs.xml</feed>
+</page-action>
+<feed>https://groups.google.com/group/entermedia/feed/rss_v2_0_topics.xml</feed>
+
+
+</page>
